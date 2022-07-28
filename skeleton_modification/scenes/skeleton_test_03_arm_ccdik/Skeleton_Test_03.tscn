@@ -1,16 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://c8ce10h8h0oki"]
+[gd_scene load_steps=7 format=3 uid="uid://c8ce10h8h0oki"]
 
 [ext_resource type="PackedScene" uid="uid://dkupbcsssngjs" path="res://skeleton_modification/art/3d_Robotic_Arm/Godot_CCDIK_Arm.glb" id="1"]
 
 [sub_resource type="PhysicalSkyMaterial" id="1"]
 
 [sub_resource type="Sky" id="2"]
-sky_material = SubResource( "1" )
+sky_material = SubResource("1")
 
 [sub_resource type="Environment" id="3"]
 background_mode = 2
 background_energy = 2.0
-sky = SubResource( "2" )
+sky = SubResource("2")
 ambient_light_source = 3
 
 [sub_resource type="PlaneMesh" id="4"]
@@ -18,9 +18,60 @@ size = Vector2(20, 20)
 
 [sub_resource type="SphereMesh" id="5"]
 
-[sub_resource type="SkeletonModification3DCCDIK" id="SkeletonModification3DCCDIK_hhva8"]
-target_nodepath = NodePath("../../../CCDIK_Target")
-tip_nodepath = NodePath("BoneAttachment3D/CCDIK_Tip")
+[node name="Skeleton_Test_03" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.637841, 0.642996, -0.423929, 0, 0.550437, 0.834877, 0.770168, -0.532518, 0.351091, 0, 7.59687, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("3")
+
+[node name="FloorMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("4")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.864696, -0.320176, 0.387026, 0, 0.770513, 0.637424, -0.502296, -0.551178, 0.666259, 3.49703, 9.11224, 5.24953)
+
+[node name="CCDIK_Target" type="Position3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0705804, 5.45002, 3.24274)
+
+[node name="DEBUG_LookAt" type="MeshInstance3D" parent="CCDIK_Target"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource("5")
+
+[node name="Godot_CCDIK_Arm" parent="." instance=ExtResource("1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.55982, 0, 0)
+
+[node name="Skeleton3D" parent="Godot_CCDIK_Arm/Robotic_Arm_Armature" index="0"]
+bones/1/rotation = Quaternion(0, 0.969165, 0, -0.246413)
+bones/1/scale = Vector3(0.999997, 1, 0.999997)
+bones/2/rotation = Quaternion(-0.14518, -7.37154e-08, -1.08167e-08, 0.989405)
+bones/2/scale = Vector3(1.00001, 0.999999, 1)
+bones/3/position = Vector3(-1.09193e-06, 2.56999, 3.72529e-06)
+bones/3/rotation = Quaternion(-0.205536, -1.145e-08, 1.27017e-07, 0.978649)
+bones/3/scale = Vector3(1.00001, 0.999994, 0.999995)
+bones/4/position = Vector3(-5.30481e-06, 2.57302, -4.41074e-06)
+bones/4/rotation = Quaternion(0.670124, 0.67012, -0.225692, 0.225693)
+bones/4/scale = Vector3(0.999999, 1, 1)
+bones/5/position = Vector3(-1.38283e-05, 0.50235, -1.90735e-06)
+bones/5/rotation = Quaternion(0.4641, -0.464111, -0.533491, 0.533479)
+bones/5/scale = Vector3(1, 0.999999, 0.999998)
+bones/6/position = Vector3(-1.78814e-07, 0.626299, -6.19888e-06)
+bones/6/rotation = Quaternion(-0.635695, 0.309672, 0.30967, 0.635688)
+bones/6/scale = Vector3(0.999992, 0.999991, 1)
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="Godot_CCDIK_Arm/Robotic_Arm_Armature/Skeleton3D" index="1"]
+transform = Transform3D(0.894274, -0.415693, 0.165813, 0.273354, 0.213997, -0.937798, 0.354319, 0.883975, 0.305, 0.811913, 5.27671, 2.54521)
+bone_name = "Joint_05"
+bone_idx = 6
+
+[node name="CCDIK_Tip" type="Position3D" parent="Godot_CCDIK_Arm/Robotic_Arm_Armature/Skeleton3D/BoneAttachment3D"]
+transform = Transform3D(1, 4.5528e-21, 0, -1.38943e-15, 1, -5.32907e-15, -5.68434e-14, -3.55271e-14, 1, 0, 0.781424, 2.98023e-07)
+
+[node name="SkeletonModification3DCCDIK" type="SkeletonModification3DCCDIK" parent="Godot_CCDIK_Arm/Robotic_Arm_Armature/Skeleton3D" index="2"]
+target_nodepath = NodePath("../../../../CCDIK_Target")
+tip_nodepath = NodePath("../BoneAttachment3D/CCDIK_Tip")
 ccdik_data_chain_length = 6
 joint_data/0/bone_name = "Joint_00"
 joint_data/0/bone_index = 1
@@ -46,59 +97,5 @@ joint_data/5/bone_name = "Joint_05"
 joint_data/5/bone_index = 6
 joint_data/5/ccdik_axis = 2
 joint_data/5/enable_joint_constraint = false
-
-[sub_resource type="SkeletonModificationStack3D" id="SkeletonModificationStack3D_0r3s3"]
-modification_count = 1
-modifications/0 = SubResource( "SkeletonModification3DCCDIK_hhva8" )
-
-[node name="Skeleton_Test_03" type="Node3D"]
-script = null
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.637841, 0.642996, -0.423929, 0, 0.550437, 0.834877, 0.770168, -0.532518, 0.351091, 0, 7.59687, 0)
-shadow_enabled = true
-script = null
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( "3" )
-script = null
-
-[node name="FloorMesh" type="MeshInstance3D" parent="."]
-mesh = SubResource( "4" )
-surface_material_override/0 = null
-script = null
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.864696, -0.320176, 0.387026, 0, 0.770513, 0.637424, -0.502296, -0.551178, 0.666259, 3.49703, 9.11224, 5.24953)
-script = null
-
-[node name="CCDIK_Target" type="Position3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0705804, 5.45002, 3.24274)
-script = null
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="DEBUG_LookAt" type="MeshInstance3D" parent="CCDIK_Target"]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
-mesh = SubResource( "5" )
-surface_material_override/0 = null
-script = null
-
-[node name="Godot_CCDIK_Arm" parent="." instance=ExtResource( "1" )]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.55982, 0, 0)
-
-[node name="Skeleton3D" parent="Godot_CCDIK_Arm/Robotic_Arm_Armature" index="0"]
-modification_stack = SubResource( "SkeletonModificationStack3D_0r3s3" )
-
-[node name="BoneAttachment3D" type="BoneAttachment3D" parent="Godot_CCDIK_Arm/Robotic_Arm_Armature/Skeleton3D" index="1"]
-transform = Transform3D(1, 6.15812e-15, -2.78181e-08, 5.96046e-08, 1, 1.58933e-08, 8.74228e-08, 4.37114e-08, 1, 0.502351, 6.58643, 0.626298)
-bone_name = "Joint_05"
-bone_idx = 6
-script = null
-
-[node name="CCDIK_Tip" type="Position3D" parent="Godot_CCDIK_Arm/Robotic_Arm_Armature/Skeleton3D/BoneAttachment3D"]
-transform = Transform3D(1, 2.75286e-21, 0, -1.38943e-15, 1, -5.32907e-15, -4.26326e-14, -2.84217e-14, 1, 0, 0.781424, 1.78814e-07)
-script = null
 
 [editable path="Godot_CCDIK_Arm"]
