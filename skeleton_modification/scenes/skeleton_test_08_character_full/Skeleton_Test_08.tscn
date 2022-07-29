@@ -1,16 +1,16 @@
-[gd_scene load_steps=14 format=3 uid="uid://dk67adaxfasfy"]
+[gd_scene load_steps=7 format=3 uid="uid://dk67adaxfasfy"]
 
 [ext_resource type="PackedScene" uid="uid://ceccgkwb72a5w" path="res://skeleton_modification/art/Alicia_Solid/AliciaSolid_vrm-0.51.glb" id="1"]
 
 [sub_resource type="PhysicalSkyMaterial" id="1"]
 
 [sub_resource type="Sky" id="2"]
-sky_material = SubResource( "1" )
+sky_material = SubResource("1")
 
 [sub_resource type="Environment" id="3"]
 background_mode = 2
 background_energy = 1.5
-sky = SubResource( "2" )
+sky = SubResource("2")
 ambient_light_source = 3
 
 [sub_resource type="PlaneMesh" id="4"]
@@ -18,26 +18,140 @@ size = Vector2(20, 20)
 
 [sub_resource type="SphereMesh" id="5"]
 
-[sub_resource type="SkeletonModification3DLookAt" id="SkeletonModification3DLookAt_fqi10"]
+[node name="Skeleton_Test_08" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.637841, 0.642996, -0.423929, 0, 0.550437, 0.834877, 0.770168, -0.532518, 0.351091, 0, 7.59687, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("3")
+
+[node name="FloorMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("4")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.864696, -0.320176, 0.387026, 0, 0.770513, 0.637424, -0.502296, -0.551178, 0.666259, 3.49703, 9.11224, 5.24953)
+
+[node name="Head_Target" type="Position3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.897905, 6.20589, 2.03227)
+
+[node name="DEBUG" type="MeshInstance3D" parent="Head_Target"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource("5")
+
+[node name="Left_Eye_Target" type="Position3D" parent="Head_Target"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.250352, -0.218684, 0)
+
+[node name="DEBUG" type="MeshInstance3D" parent="Head_Target/Left_Eye_Target"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource("5")
+
+[node name="Right_Eye_Target" type="Position3D" parent="Head_Target"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.564901, -0.214603, 0)
+
+[node name="DEBUG" type="MeshInstance3D" parent="Head_Target/Right_Eye_Target"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource("5")
+
+[node name="Left_Arm_Target" type="Position3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.472686, 3.87846, 0.281118)
+
+[node name="DEBUG" type="MeshInstance3D" parent="Left_Arm_Target"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource("5")
+
+[node name="Left_Arm_Pole" type="Position3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7491, 4.59118, -0.656124)
+
+[node name="DEBUG" type="MeshInstance3D" parent="Left_Arm_Pole"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource("5")
+
+[node name="Right_Arm_Target" type="Position3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.449335, 3.86917, 0.338939)
+
+[node name="DEBUG" type="MeshInstance3D" parent="Right_Arm_Target"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource("5")
+
+[node name="Right_Arm_Pole" type="Position3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.12923, 4.62711, -0.767267)
+
+[node name="DEBUG" type="MeshInstance3D" parent="Right_Arm_Pole"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource("5")
+
+[node name="Spine_Target" type="Position3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0.166389)
+
+[node name="DEBUG_LookAt" type="MeshInstance3D" parent="Spine_Target"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource("5")
+
+[node name="AliciaSolid_vrm-051" parent="." instance=ExtResource("1")]
+transform = Transform3D(-4, 0, -1.30337e-06, 0, 4, 0, 1.30337e-06, 0, -4, 0, 0, 0)
+
+[node name="Skeleton3D" parent="AliciaSolid_vrm-051/Root" index="0"]
+bones/31/rotation = Quaternion(-0.0148113, 1.27061e-10, 1.11624e-08, 0.99989)
+bones/32/position = Vector3(6.75016e-14, 0.0562786, -0.000640532)
+bones/32/rotation = Quaternion(2.01259e-06, -1.7267e-14, -1.50791e-12, 1)
+bones/33/position = Vector3(-8.17124e-14, 0.0443237, -0.000504645)
+bones/33/rotation = Quaternion(-0.0145365, 3.21736e-09, 9.61794e-08, 0.999894)
+bones/36/position = Vector3(0, 0, 0)
+bones/36/rotation = Quaternion(0.0652242, 0.166756, 0.173677, 0.968387)
+bones/36/scale = Vector3(1, 1, 1)
+bones/37/position = Vector3(-0.208958, -0.00568509, -0.000749812)
+bones/37/rotation = Quaternion(-0.200369, -0.468586, 0.585038, 0.63088)
+bones/37/scale = Vector3(1, 1, 1)
+bones/62/rotation = Quaternion(0.201584, 0.213676, -0.0451119, 0.954815)
+bones/63/rotation = Quaternion(-0.0811213, -0.0811837, -0.00662968, 0.99337)
+bones/63/scale = Vector3(1, 1, 1)
+bones/66/rotation = Quaternion(-0.0712134, -0.101623, -0.00729346, 0.992244)
+bones/66/scale = Vector3(1, 1, 1)
+bones/102/position = Vector3(0, 0, 0)
+bones/102/rotation = Quaternion(0.157461, 0.064041, -0.578143, 0.798033)
+bones/102/scale = Vector3(1, 1, 1)
+bones/103/position = Vector3(0.208924, -0.0066404, -0.000915527)
+bones/103/rotation = Quaternion(-0.168204, 0.00878298, 0.00270964, 0.985709)
+bones/103/scale = Vector3(1, 1, 1)
+
+[node name="BoneAttachment3D_Left_Hand" type="BoneAttachment3D" parent="AliciaSolid_vrm-051/Root/Skeleton3D" index="12"]
+transform = Transform3D(-0.277353, -0.837451, -0.470905, 0.823926, 0.0447879, -0.564925, 0.494188, -0.544674, 0.677576, -0.137916, 1.01296, -0.0480632)
+bone_name = "LeftHand"
+bone_idx = 38
+
+[node name="TwoBoneIK_Tip" type="Position3D" parent="AliciaSolid_vrm-051/Root/Skeleton3D/BoneAttachment3D_Left_Hand"]
+transform = Transform3D(0.995105, -0.0858069, 0.0490188, 0.0904841, 0.990569, -0.102885, -0.0397285, 0.106817, 0.993485, -0.0585712, -0.00021106, 0.000665128)
+
+[node name="BoneAttachment3D_Right_Hand" type="BoneAttachment3D" parent="AliciaSolid_vrm-051/Root/Skeleton3D" index="13"]
+transform = Transform3D(0.326952, 0.913346, 0.242696, -0.911942, 0.37229, -0.172513, -0.247918, -0.164921, 0.95464, 0.147705, 0.876004, -0.111099)
+bone_name = "RightHand"
+bone_idx = 104
+
+[node name="TwoBoneIK_Tip" type="Position3D" parent="AliciaSolid_vrm-051/Root/Skeleton3D/BoneAttachment3D_Right_Hand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0389813, 0, 0)
+
+[node name="SkeletonModification3DLookAt" type="SkeletonModification3DLookAt" parent="AliciaSolid_vrm-051/Root/Skeleton3D" index="14"]
 bone_name = "Head"
 bone_index = 62
-target_nodepath = NodePath("../../../Head_Target")
+target_nodepath = NodePath("../../../../Head_Target")
 additional_rotation = Vector3(90, 0, 0)
 
-[sub_resource type="SkeletonModification3DLookAt" id="SkeletonModification3DLookAt_g6yye"]
+[node name="SkeletonModification3DLookAt2" type="SkeletonModification3DLookAt" parent="AliciaSolid_vrm-051/Root/Skeleton3D" index="15"]
 bone_name = "eye_L"
 bone_index = 63
-target_nodepath = NodePath("../../../Head_Target/Left_Eye_Target")
+target_nodepath = NodePath("../../../../Head_Target/Left_Eye_Target")
 additional_rotation = Vector3(90, 0, 0)
 
-[sub_resource type="SkeletonModification3DLookAt" id="SkeletonModification3DLookAt_x4vkv"]
+[node name="SkeletonModification3DLookAt3" type="SkeletonModification3DLookAt" parent="AliciaSolid_vrm-051/Root/Skeleton3D" index="16"]
 bone_name = "eye_R"
 bone_index = 66
-target_nodepath = NodePath("../../../Head_Target/Right_Eye_Target")
+target_nodepath = NodePath("../../../../Head_Target/Right_Eye_Target")
 additional_rotation = Vector3(90, 0, 0)
 
-[sub_resource type="SkeletonModification3DFABRIK" id="SkeletonModification3DFABRIK_rclp6"]
-target_nodepath = NodePath("../../../Spine_Target")
+[node name="SkeletonModification3DFABRIK" type="SkeletonModification3DFABRIK" parent="AliciaSolid_vrm-051/Root/Skeleton3D" index="17"]
+target_nodepath = NodePath("../../../../Spine_Target")
 fabrik_data_chain_length = 3
 joint_data/0/bone_name = "Spine"
 joint_data/0/bone_index = 31
@@ -53,187 +167,33 @@ joint_data/1/magnet_position = Vector3(0, 0, 0)
 joint_data/2/bone_name = "Spine2"
 joint_data/2/bone_index = 33
 joint_data/2/roll = 0.0
-joint_data/2/auto_calculate_length = false
-joint_data/2/length = 0.2
+joint_data/2/auto_calculate_length = true
+joint_data/2/use_tip_node = false
 joint_data/2/magnet_position = Vector3(0, 0, 0)
 joint_data/2/use_target_basis = false
 
-[sub_resource type="SkeletonModification3DTwoBoneIK" id="SkeletonModification3DTwoBoneIK_gdl5d"]
-target_nodepath = NodePath("../../../Left_Arm_Target")
+[node name="SkeletonModification3DTwoBoneIK" type="SkeletonModification3DTwoBoneIK" parent="AliciaSolid_vrm-051/Root/Skeleton3D" index="18"]
+target_nodepath = NodePath("../../../../Left_Arm_Target")
 use_tip_node = true
-tip_node = NodePath("BoneAttachment3D_Left_Hand/TwoBoneIK_Tip")
+tip_node = NodePath("../BoneAttachment3D_Left_Hand/TwoBoneIK_Tip")
 auto_calculate_joint_length = true
 use_pole_node = true
-pole_node = NodePath("../../../Left_Arm_Pole")
+pole_node = NodePath("../../../../Left_Arm_Pole")
 joint_one/bone_name = "LeftArm"
 joint_one/bone_idx = 36
 joint_two/bone_name = "LeftForeArm"
 joint_two/bone_idx = 37
 
-[sub_resource type="SkeletonModification3DTwoBoneIK" id="SkeletonModification3DTwoBoneIK_joefs"]
-target_nodepath = NodePath("../../../Right_Arm_Target")
+[node name="SkeletonModification3DTwoBoneIK2" type="SkeletonModification3DTwoBoneIK" parent="AliciaSolid_vrm-051/Root/Skeleton3D" index="19"]
+target_nodepath = NodePath("../../../../Right_Arm_Target")
 use_tip_node = true
-tip_node = NodePath("BoneAttachment3D_Right_Hand/TwoBoneIK_Tip")
+tip_node = NodePath("../BoneAttachment3D_Right_Hand/TwoBoneIK_Tip")
 auto_calculate_joint_length = true
 use_pole_node = true
-pole_node = NodePath("../../../Right_Arm_Pole")
+pole_node = NodePath("../../../../Right_Arm_Pole")
 joint_one/bone_name = "RightArm"
 joint_one/bone_idx = 102
 joint_two/bone_name = "RightForeArm"
 joint_two/bone_idx = 103
-
-[sub_resource type="SkeletonModificationStack3D" id="SkeletonModificationStack3D_kj4yj"]
-modification_count = 6
-modifications/0 = SubResource( "SkeletonModification3DLookAt_fqi10" )
-modifications/1 = SubResource( "SkeletonModification3DLookAt_g6yye" )
-modifications/2 = SubResource( "SkeletonModification3DLookAt_x4vkv" )
-modifications/3 = SubResource( "SkeletonModification3DFABRIK_rclp6" )
-modifications/4 = SubResource( "SkeletonModification3DTwoBoneIK_gdl5d" )
-modifications/5 = SubResource( "SkeletonModification3DTwoBoneIK_joefs" )
-
-[node name="Skeleton_Test_08" type="Node3D"]
-script = null
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.637841, 0.642996, -0.423929, 0, 0.550437, 0.834877, 0.770168, -0.532518, 0.351091, 0, 7.59687, 0)
-shadow_enabled = true
-script = null
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( "3" )
-script = null
-
-[node name="FloorMesh" type="MeshInstance3D" parent="."]
-mesh = SubResource( "4" )
-surface_material_override/0 = null
-script = null
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.864696, -0.320176, 0.387026, 0, 0.770513, 0.637424, -0.502296, -0.551178, 0.666259, 3.49703, 9.11224, 5.24953)
-script = null
-
-[node name="Head_Target" type="Position3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.897905, 6.20589, 2.03227)
-script = null
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="DEBUG" type="MeshInstance3D" parent="Head_Target"]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
-mesh = SubResource( "5" )
-surface_material_override/0 = null
-script = null
-
-[node name="Left_Eye_Target" type="Position3D" parent="Head_Target"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.250352, -0.218684, 0)
-script = null
-
-[node name="DEBUG" type="MeshInstance3D" parent="Head_Target/Left_Eye_Target"]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
-mesh = SubResource( "5" )
-surface_material_override/0 = null
-script = null
-
-[node name="Right_Eye_Target" type="Position3D" parent="Head_Target"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.564901, -0.214603, 0)
-script = null
-
-[node name="DEBUG" type="MeshInstance3D" parent="Head_Target/Right_Eye_Target"]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
-mesh = SubResource( "5" )
-surface_material_override/0 = null
-script = null
-
-[node name="Left_Arm_Target" type="Position3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.472686, 3.87846, 0.281118)
-script = null
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="DEBUG" type="MeshInstance3D" parent="Left_Arm_Target"]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
-mesh = SubResource( "5" )
-surface_material_override/0 = null
-script = null
-
-[node name="Left_Arm_Pole" type="Position3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7491, 4.59118, -0.656124)
-script = null
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="DEBUG" type="MeshInstance3D" parent="Left_Arm_Pole"]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
-mesh = SubResource( "5" )
-surface_material_override/0 = null
-script = null
-
-[node name="Right_Arm_Target" type="Position3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.449335, 3.86917, 0.338939)
-script = null
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="DEBUG" type="MeshInstance3D" parent="Right_Arm_Target"]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
-mesh = SubResource( "5" )
-surface_material_override/0 = null
-script = null
-
-[node name="Right_Arm_Pole" type="Position3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.12923, 4.62711, -0.767267)
-script = null
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="DEBUG" type="MeshInstance3D" parent="Right_Arm_Pole"]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
-mesh = SubResource( "5" )
-surface_material_override/0 = null
-script = null
-
-[node name="Spine_Target" type="Position3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0.166389)
-script = null
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="DEBUG_LookAt" type="MeshInstance3D" parent="Spine_Target"]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
-mesh = SubResource( "5" )
-surface_material_override/0 = null
-script = null
-
-[node name="AliciaSolid_vrm-051" parent="." instance=ExtResource( "1" )]
-transform = Transform3D(-4, 0, -1.30337e-06, 0, 4, 0, 1.30337e-06, 0, -4, 0, 0, 0)
-
-[node name="Skeleton3D" parent="AliciaSolid_vrm-051/Root" index="0"]
-modification_stack = SubResource( "SkeletonModificationStack3D_kj4yj" )
-
-[node name="BoneAttachment3D_Left_Hand" type="BoneAttachment3D" parent="AliciaSolid_vrm-051/Root/Skeleton3D" index="12"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.49742, 1.26387, 0.00751136)
-bone_name = "LeftHand"
-bone_idx = 38
-script = null
-
-[node name="TwoBoneIK_Tip" type="Position3D" parent="AliciaSolid_vrm-051/Root/Skeleton3D/BoneAttachment3D_Left_Hand"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0522684, 0, 0)
-script = null
-
-[node name="BoneAttachment3D_Right_Hand" type="BoneAttachment3D" parent="AliciaSolid_vrm-051/Root/Skeleton3D" index="13"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.497403, 1.26257, 0.00711707)
-bone_name = "RightHand"
-bone_idx = 104
-script = null
-
-[node name="TwoBoneIK_Tip" type="Position3D" parent="AliciaSolid_vrm-051/Root/Skeleton3D/BoneAttachment3D_Right_Hand"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0389813, 0, 0)
-script = null
 
 [editable path="AliciaSolid_vrm-051"]
